@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hussein Al Fattoh</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+
+
+    <input id=city type="text" value="">
+
+    <button class="button">submit</button>
+
+    <div class="div"></div>
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $(".button").click(function () {
+
+
+
+                var city = $("#city").val();
+
+
+                var key = 'de6b2ef09a551d444039a1b7f4ab2cfe';
+
+                $.ajax({
+
+                    url: 'http://api.openweathermap.org/data/2.5/weather',
+                    type: "GET",
+                    dataType: 'json',
+                    data: {
+                        q: city,
+                        appid: key,
+                        units: 'metric'
+                    },
+                    success: function (data) {
+
+                        var wf = '';
+
+                        $.each(data.weather, function (index, val) {
+
+                            wf += '<b><p>City : ' + data.name + '</b></P>' +
+                                '<b><p>Temperature : ' + data.main.temp +
+                                '&deg;</b></P>' +
+                                '<b><p> Description : ' + val.main + '</b></P>' +
+                                // "," +
+                                '<b><p>Humidity : ' + data.main.humidity +
+                                '%</b></P>' +
+                                // "," +
+                                '<b><p>Pressure : ' + data.main.pressure +
+                                'hPa</b></P>' +
+
+                                '<b><p> Max Temp : ' + data.main.temp_max +
+                                '&deg</b></P>' +
+                                // "," +
+                                '<b><p>Min Temp : ' + data.main.temp_min +
+                                '&deg</b></P>' +
+                                '<b><p>Wind Speed : ' + data.wind.speed +
+                                'm/s</b></P>'
+
+                        });
+
+                        $(".div").html(wf);
+
+
+                    }
+
+
+                });
+
+            })
+
+
+
+
+        })
+    </script>
+
+
+
+
+</body>
+
+</html>
